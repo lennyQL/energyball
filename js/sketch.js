@@ -19,7 +19,7 @@ var tmpx, tmpy;
 
 var downLevel = 5;
 var upLevel = 3;
-var voiceLevel = [0.1, 0.4, 0.7];
+var voiceLevel = [0.05, 0.4, 0.7]; //default: 0.1, 0.4, 0.7
 
 var spRage = 5;
 var spBorderUp = 240;
@@ -39,7 +39,7 @@ var countTimeReturn = 0;
 
 var ballOn = true;
 var burstOn = false;
-var gaugeOn = false;
+var gaugeOn = true; // false;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -345,36 +345,36 @@ function draw() {
 
 
     // スペクトラム描画
-    //     /*
-    // for (var i = 0; i < spectrum.length; i++) {
-    //     var x = map(i, 0, spectrum.length, 0, soundWindow.width);
-    //     var y = map(spectrum[i], 0, 255, 0, soundWindow.height);
-    //     fill(255);
-    //     stroke(0);
-    //     strokeWeight(2);
-    //     rect(x, soundWindow.position.y + soundWindow.height, (soundWindow.width) / spectrum.length, -y);
+    /*
+    for (var i = 0; i < spectrum.length; i++) {
+        var x = map(i, 0, spectrum.length, 0, soundWindow.width);
+        var y = map(spectrum[i], 0, 255, 0, soundWindow.height);
+        fill(255);
+        stroke(0);
+        strokeWeight(2);
+        rect(x, soundWindow.position.y + soundWindow.height, (soundWindow.width) / spectrum.length, -y);
 
 
-    //     // スペクトラムの設定地点
-    //     var lu = map(spBorderUp, 0, 255, 0, soundWindow.height);
-    //     var ld = map(spBorderDw, 0, 255, 0, soundWindow.height);
-    //     push();
-    //     stroke(100, 255, 100, 1);
-    //     line(soundWindow.position.x, soundWindow.height - lu, soundWindow.width, soundWindow.height - lu);
-    //     stroke(100, 255, 250, 1);
-    //     line(soundWindow.position.x, soundWindow.height - ld, soundWindow.width, soundWindow.height - ld);
-    //     pop();
+        // スペクトラムの設定地点
+        var lu = map(spBorderUp, 0, 255, 0, soundWindow.height);
+        var ld = map(spBorderDw, 0, 255, 0, soundWindow.height);
+        push();
+        stroke(100, 255, 100, 1);
+        line(soundWindow.position.x, soundWindow.height - lu, soundWindow.width, soundWindow.height - lu);
+        stroke(100, 255, 250, 1);
+        line(soundWindow.position.x, soundWindow.height - ld, soundWindow.width, soundWindow.height - ld);
+        pop();
 
 
-    //     // 最大スペクトラム
-    //     if (spectrum[i] == Math.max.apply(null, spectrum)) { //> maxOsc) {
-    //         // スペクトラムの最大値の色づけ
-    //         fill(220, 30, 0);
-    //         rect(x, soundWindow.position.y + soundWindow.height, soundWindow.width / spectrum.length, -y);
-    //     }
+        // 最大スペクトラム
+        if (spectrum[i] == Math.max.apply(null, spectrum)) { //> maxOsc) {
+            // スペクトラムの最大値の色づけ
+            fill(220, 30, 0);
+            rect(x, soundWindow.position.y + soundWindow.height, soundWindow.width / spectrum.length, -y);
+        }
 
-    // }
-    //     */
+    }
+    */
 
 
 
@@ -417,8 +417,24 @@ function draw() {
 }
 
 function mouseClicked() {
-    //fireGo = true;
-    //r += 50;
+    // //fireGo = true;
+    // //r += 50;
+
+    // if (collidePointRect(mouseX, mouseY, 0, 0, width, 50)) {
+    //     if (gaugeOn) {
+    //         gaugeOn = false;
+    //     } else {
+    //         gaugeOn = true;
+    //     }
+    // } else {
+    //     reset();
+    // }
+}
+
+function touchStarted() {
+    getAudioContext().resume();
+
+    // ゲージオンオフ と リセット
     if (collidePointRect(mouseX, mouseY, 0, 0, width, 50)) {
         if (gaugeOn) {
             gaugeOn = false;
@@ -428,23 +444,19 @@ function mouseClicked() {
     } else {
         reset();
     }
-}
-
-function touchStarted() {
-    getAudioContext().resume();
 
     fireGo = true;
     return false;
 }
 
-function touchMoved() {
-    return false;
-}
+// function touchMoved() {
+//     return false;
+// }
 
-function touchEnded() {
-    fireGo = true;
-    return false;
-}
+// function touchEnded() {
+//     fireGo = true;
+//     return false;
+// }
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
