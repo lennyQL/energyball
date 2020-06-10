@@ -214,14 +214,17 @@ function draw() {
     if (ballOn) {
         if (ball[0].radius < R) {
             ball[0].radius += 1;
-            ball[0].draw();
+            // ball[0].draw();
             if (ball[0].radius > R) {
                 r = R;
             }
         } else {
             ball[0].radius = r;
-            ball[0].draw();
+            // ball[0].draw();
         }
+        // ボールのサイズを画面に収まるようにマッピング
+        ball[0].radius = map(ball[0].radius, R, R * 10, R, windowHeight-50);
+        ball[0].draw();
         //console.log(ball[0].radius);
     } else {
         elem = [];
