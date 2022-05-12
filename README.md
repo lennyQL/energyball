@@ -2,8 +2,9 @@
 
 [https://lennyql.github.io/energyball/]
 
-- 製作者：
-- 制作期間：２日くらい(第八耐で制作)
+- 製作者：Lenny
+- 制作時期：2017/11上旬
+- 制作期間：２日くらい(大八耐で制作)
 - 使用言語：JavaScript
 - 使用ライブラリ：p5.js(Processing の js ライブラリ)
 - 動作環境：Web ブラウザ(確認済み：Google Chrome)、マイク必須
